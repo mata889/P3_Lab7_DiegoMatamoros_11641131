@@ -6,7 +6,7 @@
 using namespace std;
 
 class Usuario{
-private:
+protected:
 	string nombre,edad,id,numero,username,password;
 public:
 	Usuario();
@@ -26,6 +26,6 @@ public:
 	void setUsername(string);
 	void setPassword(string);
 
-	~Usuario();
+	virtual~Usuario();
 };
 #endif

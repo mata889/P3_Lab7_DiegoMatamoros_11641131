@@ -15,6 +15,6 @@ public:
 	void setContratacion(string);
 	void setSueldo(int);
 
-	~Personal();
+	virtual~Personal();
 };
 #endif

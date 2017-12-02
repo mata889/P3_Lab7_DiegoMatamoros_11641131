@@ -17,6 +17,6 @@ public:
 	void setNumeral(string);
 
 
-	~Cliente();
+	virtual~Cliente();
 };
 #endif

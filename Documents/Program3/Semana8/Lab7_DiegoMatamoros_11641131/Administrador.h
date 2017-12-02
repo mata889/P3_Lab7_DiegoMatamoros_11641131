@@ -2,25 +2,24 @@
 #define ADMINISTRADOR_H
 
 #include <string>
-#include <vector>
+
 #include "Personal.h"
 
 using namespace std;
 
 class Administrador:public Personal{
 private:
-	vector<Personal>contratados;
-	vector<Personal>despedidos;
+	int contratados, despedidos;
 
 public:
-	Administrador(string, string);
+	Administrador(int, int, string, int);
 	Administrador();
 
-	vector<Personal> getContratados();
-	vector<Personal> getDespedidos();
+	int getContratados();
+	int getDespedidos();
 
-	void setContratados(vector<Personal>);
-	void setDespedidos(vector<Personal>);
+	void setContratados(int);
+	void setDespedidos(int);
 
 	virtual ~Administrador();
 
