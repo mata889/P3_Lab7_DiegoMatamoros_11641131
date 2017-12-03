@@ -1,1 +1,1 @@
-A,diego,diego,diego,diego,diego,diego,diego,1,1,0;C,juan,juan,juan,juan,juan,juan,1234,1234,maiz;
+A,diego,diego,diego,diego,diego,diego,diego,1,2,0;C,juan,juan,juan,juan,juan,juan,1234,1234,maiz;A,ramon,ramon,ramon,ramon,ramon,ramon,234,334,1,0;L,h,h,h,h,h,h,2333,123,50.000000;

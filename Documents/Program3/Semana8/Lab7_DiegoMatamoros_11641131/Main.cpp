@@ -10,6 +10,7 @@
 #include <cmath>
 #include <iostream>
 #include <fstream>
+#include <stdlib.h>
 using namespace std;
 
 vector<Usuario*> Contratar(vector<Usuario*>,Usuario*);
@@ -635,9 +636,9 @@ vector<Usuario*> leer(){
   fstream file("restaurante.txt");
   if (file.is_open()) {
   while(!file.eof()){
-    string line,tipo,user,pass,nombre,id,numero,edadS,year,salrioS;
-    int edad;
-    double salario;
+    string line,tipo,user,pass,nombre,id,numero,edadS,fecha,salrioS;
+
+    int salario;
     getline(file,tipo,',');
     if (tipo == "A") {
       int contra, desp;
@@ -646,17 +647,16 @@ vector<Usuario*> leer(){
       getline(file,pass,',');
       getline(file,nombre,',');
       getline(file,edadS,',');
-
       getline(file,id,',');
       getline(file,numero,',');
-      getline(file,year,',');
+      getline(file,fecha,',');
       getline(file,salrioS,',');
-      salario = stod(salrioS);
+      salario = stoi(salrioS);
       getline(file,contras,',');
       contra = stoi(contras);
       getline(file,despes,';');
       desp = stoi(despes);
-      lista.push_back(new Administrador(user,pass,nombre,edadS,id,numero,year,salario,contra,desp));
+      lista.push_back(new Administrador(user,pass,nombre,edadS,id,numero,fecha,salario,contra,desp));
     }
 
     if (tipo == "C") {
@@ -665,14 +665,13 @@ vector<Usuario*> leer(){
       getline(file,pass,',');
       getline(file,nombre,',');
       getline(file,edadS,',');
-
       getline(file,id,',');
       getline(file,numero,',');
-      getline(file,year,',');
+      getline(file,fecha,',');
       getline(file,salrioS,',');
-      salario = stod(salrioS);
+      salario = stoi(salrioS);
       getline(file,plato,';');
-      lista.push_back(new Chef(user,pass,nombre,edadS,id,numero,year,salario,plato));
+      lista.push_back(new Chef(user,pass,nombre,edadS,id,numero,fecha,salario,plato));
     }
 
 
@@ -683,7 +682,6 @@ vector<Usuario*> leer(){
       getline(file,pass,',');
       getline(file,nombre,',');
       getline(file,edadS,',');
-
       getline(file,id,',');
       getline(file,numero,',');
       getline(file,direccion,',');
@@ -691,21 +689,18 @@ vector<Usuario*> leer(){
       rate = stoi(srate);
       lista.push_back(new Cliente(user,pass,nombre,edadS,id,numero,direccion,rate));
     }
-
     if (tipo == "M") {
       getline(file,user,',');
       getline(file,pass,',');
       getline(file,nombre,',');
       getline(file,edadS,',');
-
       getline(file,id,',');
       getline(file,numero,',');
-      getline(file,year,',');
+      getline(file,fecha,',');
       getline(file,salrioS,';');
-      salario = stod(salrioS);
-      lista.push_back(new Meseros(user,pass,nombre,edadS,id,numero,year,salario));
+      salario = stoi(salrioS);
+      lista.push_back(new Meseros(user,pass,nombre,edadS,id,numero,fecha,salario));
     }
-
     if (tipo == "L") {
       string motiv;
       int motivacion;
@@ -713,15 +708,15 @@ vector<Usuario*> leer(){
       getline(file,pass,',');
       getline(file,nombre,',');
       getline(file,edadS,',');
-      edad = stoi(edadS);
+      //edad = stoi(edadS);
       getline(file,id,',');
       getline(file,numero,',');
-      getline(file,year,',');
+      getline(file,fecha,',');
       getline(file,salrioS,',');
-      salario = stod(salrioS);
+      salario = stoi(salrioS);
       getline(file,motiv,';');
-      motivacion = stoi(motiv);
-      lista.push_back(new Lavaplatos(user,pass,nombre,edadS,id,numero,year,salario,motivacion));
+      motivacion = stod(motiv);
+      lista.push_back(new Lavaplatos(user,pass,nombre,edadS,id,numero,fecha,salario,motivacion));
     }
   }
 
