@@ -18,15 +18,20 @@ string menorSueldo(vector<Usuario*> );
 Meseros* agregarPlato(vector<Usuario*> ,int );
 string mayorSueldo(vector<Usuario*> );
 double promedioSuedlo(vector<Usuario*> );
+void EscribirArchivo(vector<Usuario*> );
+vector<Usuario*> leer();
 //primero guardar archivos, despues analizar si se guardaron __registrar administradores y login
 int main(){
+
 	int menu;
 	vector<Usuario*>lista;
+	lista=leer();
 	Usuario* actual;
 	do {
+
 		int sueldo;
 		string nombre,edad,id,numero,username,password,fecha;
-		cout<<"1.CrearAdministrador \n2.LoginUsuario\n0.salir"<<endl;
+		cout<<"1.CrearAdministrador \n2.LoginUsuario\n3.EscribirTodoEnArchivo\n0.salir"<<endl;
 		cin>>menu;
 		if (menu==1) {
 			//Personal(fecha, sueldo, nombre, edad, id, numero, username, password)
@@ -114,7 +119,8 @@ int main(){
 									cin>>donde;
 									cout<<"nombre del plato: ";
 									cin>>platillo;
-									agregarPlato(lista, donde)->getPlatillos().push_back(platillo);
+									Meseros* amigo=dynamic_cast<Meseros*>(lista.at(donde));
+									amigo->getPlatillos().push_back(platillo);
 								}break;
 								case 5:{//mayor sueldo
 									string MayorSueldo;
@@ -252,6 +258,14 @@ int main(){
 					}
 				}
 			}
+		}else if(menu ==3){
+			if (lista.size()>0) {
+				EscribirArchivo(lista);
+				cout<<"Se ha guardado el archivo"<<endl;
+			}else{
+				cout<<"no hay nada que guardar"<<endl;
+			}
+
 		}
 	} while(menu!=0);
 
@@ -413,4 +427,306 @@ double promedioSuedlo(vector<Usuario*> lista){
 	}
 	int promedioSueldo=(acumulador/contador);
 	return promedioSueldo;
+}
+
+void EscribirArchivo(vector<Usuario*> lista){
+	Usuario* actual;
+	ofstream afile("restaurante.txt");
+	if (afile.is_open()) {
+		for (size_t i = 0; i < lista.size(); i++) {
+			actual=lista.at(i);
+			if (dynamic_cast<Administrador*>(actual)) {//username,password,nombre,edad,id,numero,fecha,sueldo,0,0
+				char a='A';
+				string archivo;
+				Administrador* admi=dynamic_cast<Administrador*>(actual);
+				string username,password,nombre,edad,id,numero,fecha;
+				int sueldo,contratacion,despedidos;
+				username=admi->getUsername();
+				password=admi->getPassword();
+				nombre=admi->getNombre();
+				edad=admi->getEdad();
+				id=admi->getId();
+				numero=admi->getNumero();
+				fecha=admi->getContratacion();
+				sueldo=admi->getSueldo();
+				contratacion=admi->getContratados();
+				despedidos=admi->getDespedidos();
+				archivo+=a;
+				archivo+=",";
+				archivo+=username;
+				archivo+=",";
+				archivo+=password;
+				archivo+=",";
+				archivo+=nombre;
+				archivo+=",";
+				archivo+=edad;
+				archivo+=",";
+				archivo+=id;
+				archivo+=",";
+				archivo+=numero;
+				archivo+=",";
+				archivo+=fecha;
+				archivo+=",";
+				archivo+=to_string(sueldo);
+				archivo+=",";
+				archivo+=to_string(contratacion);
+				archivo+=",";
+				archivo+=to_string(despedidos);
+				archivo+=";";
+				afile<<archivo;
+			}
+			else if (dynamic_cast<Chef*>(actual)) {//username , password, nombre , edad , id, numero, contratacion, sueldo, PlatoFavorito
+				string archivo;
+				char c='C';
+				string username,password,nombre,edad,id,numero,fecha,PlatoFavorito;
+				int sueldo;
+				Chef* chef=dynamic_cast<Chef*>(actual);
+				username=chef->getUsername();
+				password=chef->getPassword();
+				nombre=chef->getNombre();
+				edad=chef->getEdad();
+				id=chef->getId();
+				numero=chef->getNumero();
+				fecha=chef->getContratacion();
+				sueldo=chef->getSueldo();
+				PlatoFavorito=chef->getPlatoFavorito();
+
+				archivo+=c;
+				archivo+=",";
+				archivo+=username;
+				archivo+=",";
+				archivo+=password;
+				archivo+=",";
+				archivo+=nombre;
+				archivo+=",";
+				archivo+=edad;
+				archivo+=",";
+				archivo+=id;
+				archivo+=",";
+				archivo+=numero;
+				archivo+=",";
+				archivo+=fecha;
+				archivo+=",";
+				archivo+=to_string(sueldo);
+				archivo+=",";
+				archivo+=PlatoFavorito;
+				archivo+=";";
+				afile<<archivo;
+			}
+			else if (dynamic_cast<Lavaplatos*>(actual)) {
+				string archivo;
+				char l='L';
+				string username,password,nombre,edad,id,numero,fecha;
+				int sueldo;
+				double motivacion;
+				Lavaplatos* lava=dynamic_cast<Lavaplatos*>(actual);
+				username=lava->getUsername();
+				password=lava->getPassword();
+				nombre=lava->getNombre();
+				edad=lava->getEdad();
+				id=lava->getId();
+				numero=lava->getNumero();
+				fecha=lava->getContratacion();
+				sueldo=lava->getSueldo();
+				motivacion=lava->getMotivacion();
+
+				archivo+=l;
+				archivo+=",";
+				archivo+=username;
+				archivo+=",";
+				archivo+=password;
+				archivo+=",";
+				archivo+=nombre;
+				archivo+=",";
+				archivo+=edad;
+				archivo+=",";
+				archivo+=id;
+				archivo+=",";
+				archivo+=numero;
+				archivo+=",";
+				archivo+=fecha;
+				archivo+=",";
+				archivo+=to_string(sueldo);
+				archivo+=",";
+				archivo+=to_string(motivacion);
+				archivo+=";";
+				afile<<archivo;
+
+			}
+			else if (dynamic_cast<Meseros*>(actual)) {//Meseros(username , password, nombre , edad , id, numero, fecha, sueldo)
+				string archivo;
+				char m='M';
+				string username,password,nombre,edad,id,numero,fecha;
+				int sueldo;
+				Meseros* mes=dynamic_cast<Meseros*>(actual);
+				username=mes->getUsername();
+				password=mes->getPassword();
+				nombre=mes->getNombre();
+				edad=mes->getEdad();
+				id=mes->getId();
+				numero=mes->getNumero();
+				fecha=mes->getContratacion();
+				sueldo=mes->getSueldo();
+
+				archivo+=m;
+				archivo+=",";
+				archivo+=username;
+				archivo+=",";
+				archivo+=password;
+				archivo+=",";
+				archivo+=nombre;
+				archivo+=",";
+				archivo+=edad;
+				archivo+=",";
+				archivo+=id;
+				archivo+=",";
+				archivo+=numero;
+				archivo+=",";
+				archivo+=fecha;
+				archivo+=",";
+				archivo+=to_string(sueldo);
+				archivo+=";";
+				afile<<archivo;
+
+			}
+			else if (dynamic_cast<Cliente*>(actual)) {//Cliente(username,password,nombre,edad,id,numero,direccion,numeral
+				string archivo;
+				char c='c';
+				string username,password,nombre,edad,id,numero,direccion;
+				int numeral;
+				Cliente* cli=dynamic_cast<Cliente*>(actual);
+				username=cli->getUsername();
+				password=cli->getPassword();
+				nombre=cli->getNombre();
+				edad=cli->getEdad();
+				id=cli->getId();
+				numero=cli->getNumero();
+				direccion=cli->getDireccion();
+				numeral=cli->getNumeral();
+				archivo+=c;
+				archivo+=",";
+				archivo+=username;
+				archivo+=",";
+				archivo+=password;
+				archivo+=",";
+				archivo+=nombre;
+				archivo+=",";
+				archivo+=edad;
+				archivo+=",";
+				archivo+=id;
+				archivo+=",";
+				archivo+=numero;
+				archivo+=",";
+				archivo+=direccion;
+				archivo+=",";
+				archivo+=to_string(numeral);
+				archivo+=";";
+				afile<<archivo;
+
+			}
+		}
+		afile.close();
+	}
+
+}
+
+vector<Usuario*> leer(){
+  vector<Usuario*> lista;
+  fstream file("restaurante.txt");
+  if (file.is_open()) {
+  while(!file.eof()){
+    string line,tipo,user,pass,nombre,id,numero,edadS,year,salrioS;
+    int edad;
+    double salario;
+    getline(file,tipo,',');
+    if (tipo == "A") {
+      int contra, desp;
+      string contras,despes;
+      getline(file,user,',');
+      getline(file,pass,',');
+      getline(file,nombre,',');
+      getline(file,edadS,',');
+
+      getline(file,id,',');
+      getline(file,numero,',');
+      getline(file,year,',');
+      getline(file,salrioS,',');
+      salario = stod(salrioS);
+      getline(file,contras,',');
+      contra = stoi(contras);
+      getline(file,despes,';');
+      desp = stoi(despes);
+      lista.push_back(new Administrador(user,pass,nombre,edadS,id,numero,year,salario,contra,desp));
+    }
+
+    if (tipo == "C") {
+      string plato;
+      getline(file,user,',');
+      getline(file,pass,',');
+      getline(file,nombre,',');
+      getline(file,edadS,',');
+
+      getline(file,id,',');
+      getline(file,numero,',');
+      getline(file,year,',');
+      getline(file,salrioS,',');
+      salario = stod(salrioS);
+      getline(file,plato,';');
+      lista.push_back(new Chef(user,pass,nombre,edadS,id,numero,year,salario,plato));
+    }
+
+
+    if (tipo == "c") {
+      string direccion,srate;
+      int rate;
+      getline(file,user,',');
+      getline(file,pass,',');
+      getline(file,nombre,',');
+      getline(file,edadS,',');
+
+      getline(file,id,',');
+      getline(file,numero,',');
+      getline(file,direccion,',');
+      getline(file,srate,';');
+      rate = stoi(srate);
+      lista.push_back(new Cliente(user,pass,nombre,edadS,id,numero,direccion,rate));
+    }
+
+    if (tipo == "M") {
+      getline(file,user,',');
+      getline(file,pass,',');
+      getline(file,nombre,',');
+      getline(file,edadS,',');
+
+      getline(file,id,',');
+      getline(file,numero,',');
+      getline(file,year,',');
+      getline(file,salrioS,';');
+      salario = stod(salrioS);
+      lista.push_back(new Meseros(user,pass,nombre,edadS,id,numero,year,salario));
+    }
+
+    if (tipo == "L") {
+      string motiv;
+      int motivacion;
+      getline(file,user,',');
+      getline(file,pass,',');
+      getline(file,nombre,',');
+      getline(file,edadS,',');
+      edad = stoi(edadS);
+      getline(file,id,',');
+      getline(file,numero,',');
+      getline(file,year,',');
+      getline(file,salrioS,',');
+      salario = stod(salrioS);
+      getline(file,motiv,';');
+      motivacion = stoi(motiv);
+      lista.push_back(new Lavaplatos(user,pass,nombre,edadS,id,numero,year,salario,motivacion));
+    }
+  }
+
+    file.close();
+    return lista;
+
+  }
 }

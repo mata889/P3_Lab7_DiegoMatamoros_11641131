@@ -1,0 +1,1 @@
+A,diego,diego,diego,diego,diego,diego,diego,1,1,0;C,juan,juan,juan,juan,juan,juan,1234,1234,maiz;
