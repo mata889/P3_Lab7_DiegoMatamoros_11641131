@@ -12,7 +12,7 @@ private:
 	int contratados, despedidos;
 
 public:
-	Administrador(int, int, string, int);
+	Administrador(string,string,string,string,string,string,string,int,int,int);
 	Administrador();
 
 	int getContratados();

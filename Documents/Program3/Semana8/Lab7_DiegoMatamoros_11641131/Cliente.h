@@ -5,16 +5,17 @@
 
 class Cliente:public Usuario{
 private:
-	string direccion,numeral;
+	string direccion;
+	int numeral;
 public:
 	Cliente();
-	Cliente(string, string,string,string,string,string,string,string);
+	Cliente(string, string,string,string,string,string,string,int);
 	string getDireccion();
-	string getNumeral();
+	int getNumeral();
 
 
 	void setDireccion(string);
-	void setNumeral(string);
+	void setNumeral(int);
 
 
 	virtual~Cliente();

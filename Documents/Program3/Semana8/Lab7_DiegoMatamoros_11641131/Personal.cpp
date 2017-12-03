@@ -5,9 +5,9 @@ Personal::Personal(){
 	this->contratacion="";
 	this->sueldo=0;
 }
-Personal::Personal(string pContratacion,int pSueldo,string nombre,string edad,string id,string numero,string username,string password):Usuario(nombre,edad,id,numero,username,password){
-	pContratacion=contratacion;
-	pSueldo=sueldo;
+Personal::Personal(string username,string password,string nombre,string edad,string id,string numero,string pContratacion,int pSueldo):Usuario(nombre,edad,id,numero,username,password){
+	contratacion=pContratacion;
+	sueldo=pSueldo;
 }
 string Personal::getContratacion(){
 	return contratacion;
@@ -20,4 +20,7 @@ void Personal::setContratacion(string pContratacion){
 }
 void Personal::setSueldo(int pSueldo){
 	pSueldo=sueldo;
+}
+Personal::~Personal(){
+	
 }

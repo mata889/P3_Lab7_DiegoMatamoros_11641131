@@ -8,15 +8,15 @@
 
 class Meseros:public Personal{
 private:
-	vector<string*> platillos;
+	vector<string> platillos;
 public:
 	Meseros();
-	Meseros(string ,int,vector<string*>);
+	Meseros(string,string,string,string,string,string,string,int);
 
-	vector <string*> getPlatillos();
+	vector <string> getPlatillos();
 
-	void setPlatillos(vector<string*>);
+	void setPlatillos(vector<string>);
 
-	virtual ~Meseros();
+	virtual~Meseros();
 };
 #endif

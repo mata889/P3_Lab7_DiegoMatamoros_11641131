@@ -9,7 +9,7 @@ private:
 	string PlatoFavorito;
 public:
 	Chef();
-	Chef(string,string,int);
+	Chef(string,string,string,string,string,string,string,int,string);
 	string getPlatoFavorito();
 	void setPlatoFavorito(string);
 

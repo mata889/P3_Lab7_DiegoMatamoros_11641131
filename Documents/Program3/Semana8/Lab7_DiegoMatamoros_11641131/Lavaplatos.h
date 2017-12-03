@@ -8,7 +8,7 @@ private:
 	double motivacion;
 public:
 	Lavaplatos();
-	Lavaplatos(double,string,int );
+	Lavaplatos(string,string,string,string,string,string,string,int,double);
 	double getMotivacion();
 	void setMotivacion(double);
 

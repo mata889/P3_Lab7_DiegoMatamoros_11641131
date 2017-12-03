@@ -7,7 +7,7 @@ private:
 	string contratacion;
 	int sueldo;
 public:
-	Personal(string,int,string,string,string,string,string,string);
+	Personal(string ,string ,string ,string ,string ,string ,string ,int );
 	Personal();
 	string getContratacion();
 	int getSueldo();
@@ -18,3 +18,4 @@ public:
 	virtual~Personal();
 };
 #endif
+//string pusername ,string ppassword,string pnombre ,int pedad ,string pid,string pnumero,string pyear,double psueldo,int pcontratados,int pdespedidos):Personal(pusername,ppassword,pnombre,pedad,pid,pnumero,pyear,psueldo

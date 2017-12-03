@@ -8,8 +8,8 @@ Administrador::Administrador(){
 	this->contratados = 0;
 	this->despedidos = 0;
 }
-
-Administrador::Administrador(int pContratados, int pDespedidos, string fecha, int sueldo):Personal(fecha, sueldo, nombre, edad, id, numero, username, password){
+//string pusername ,string ppassword,string pnombre ,int pedad ,string pid,string pnumero,string pyear,double psueldo,int pcontratados,int pdespedidos):Personal(pusername,ppassword,pnombre,pedad,pid,pnumero,pyear,psueldo
+Administrador::Administrador(string username ,string password,string nombre ,string edad ,string id,string numero,string contratacion,int sueldo,int pContratados,int pDespedidos):Personal( username, password, nombre, edad, id, numero, contratacion, sueldo){
 	contratados =pContratados;
 	despedidos =pDespedidos;
 }
@@ -24,12 +24,12 @@ int Administrador::getDespedidos(){
 }
 
 void Administrador::setContratados(int pContratados){
-	contratados =pContratados;
+	contratados +=pContratados;
 }
 
 void Administrador::setDespedidos(int pDespedidos){
-	despedidos =pDespedidos;
+	despedidos +=pDespedidos;
 }
-
 Administrador::~Administrador(){
+
 }

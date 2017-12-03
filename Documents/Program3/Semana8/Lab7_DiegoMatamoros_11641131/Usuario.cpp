@@ -11,12 +11,12 @@ Usuario::Usuario(){//string nombre,edad,id,numero,username,password;
 	this->password="";
 }
 Usuario::Usuario(string pNombre,string pEdad,string pId,string pNumero,string pUsername,string pPassword){
-	pNombre=nombre;
-	pEdad=edad;
-	pId=id;
-	pNumero=numero;
-	pUsername=username;
-	pPassword=password;
+	nombre=pNombre;
+	edad=pEdad;
+	id=pId;
+	numero=pNombre;
+	username=pUsername;
+	password=pPassword;
 }
 
 string Usuario::getNombre(){
@@ -56,5 +56,5 @@ void Usuario::setPassword(string pPassword){
 	pPassword=password;
 }
 Usuario::~Usuario(){
-
+	
 }

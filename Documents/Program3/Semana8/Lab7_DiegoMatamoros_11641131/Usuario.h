@@ -26,6 +26,6 @@ public:
 	void setUsername(string);
 	void setPassword(string);
 
-	virtual~Usuario();
+	virtual ~Usuario();
 };
 #endif
