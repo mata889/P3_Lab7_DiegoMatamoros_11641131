@@ -24,11 +24,11 @@ int Administrador::getDespedidos(){
 }
 
 void Administrador::setContratados(int pContratados){
-	contratados +=pContratados;
+	contratados =pContratados;
 }
 
 void Administrador::setDespedidos(int pDespedidos){
-	despedidos +=pDespedidos;
+	despedidos =pDespedidos;
 }
 Administrador::~Administrador(){
 

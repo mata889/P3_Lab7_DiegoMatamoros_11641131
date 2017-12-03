@@ -88,8 +88,8 @@ int main(){
 							switch (opcionAdmi) {
 								case 1:{//contratar
 									lista=Contratar(lista,actual);
-									//int cont=1;
-									//actual->setContratados(cont);
+									int cont=1;
+									dynamic_cast<Administrador*>(actual)->setContratados(dynamic_cast<Administrador*>(actual)->getContratados()+cont);
 								}break;
 								case 2:{//despedir
 									lista=Despedir(lista,actual);
@@ -152,7 +152,15 @@ int main(){
 								}break;
 							}
 						}else if (dynamic_cast<Cliente*>(actual)) {
-							/* code */
+							int conta = 0,acum= 0;
+							for (int i = 0; i < lista.size(); i++) {
+								if (dynamic_cast<Cliente*>(lista.at(i))) {
+									Cliente* temp = dynamic_cast<Cliente*>(lista.at(i));
+									acum+=temp->getNumeral();
+									conta++;
+								}
+							}
+							cout<<"EL promedio es:"<<(acum/conta)<<endl;
 						}else if (dynamic_cast<Lavaplatos*>(actual)) {
 							int opLava;
 							cout<<"1.PuedeRenunciar\n2.PuedePedirAumento\n escoja "<<endl;
@@ -186,39 +194,62 @@ int main(){
 									}
 								}break;
 							}
-						}else if (dynamic_cast<Chef*>(actual)) {
+						}else if(dynamic_cast<Chef*>(actual)){
 							int opChef;
 							cout<<"1.Gritar\n2.agradecer\nINTRODUZCA LA OPCION"<<endl;
 							cin>>opChef;
 							switch (opChef) {
 								case 1:{
+									int cont=0;
 									for (size_t i = 0; i < lista.size(); i++) {
 										if (dynamic_cast<Lavaplatos*>(lista.at(i))) {
 											cout<<i<<") "<<lista.at(i)->getNombre()<<endl;
+											cont++;
 										}
 									}
-									int Quien;
-									cout<<"Escoja a quien gritar"<<endl;
-									cin>>Quien;
+									if (cont>0) {
+
+										int Quien,dolor;
+										cout<<"Escoja a quien gritar"<<endl;
+										cin>>Quien;
+										cout<<"Que tanto lo quiere sentir como un insecto"<<endl;
+										cin>>dolor;
+										Lavaplatos* Pobre = dynamic_cast<Lavaplatos*>(lista.at(Quien));
+										Pobre->setMotivacion(Pobre->getMotivacion()-dolor);
+									}else{
+										cout<<"No hay nadie a quien gritar"<<endl;
+									}
 
 								}break;
 								case 2:{
+									int cont=0;
+									for (size_t i = 0; i < lista.size(); i++) {
+										if (dynamic_cast<Lavaplatos*>(lista.at(i))) {
+											cout<<i<<") "<<lista.at(i)->getNombre()<<endl;
+											cont++;
+										}
+									}
+									if (cont>0) {
+
+										int Quien,amor;
+										cout<<"Escoja a quien le quiere decir gracias por primera vez"<<endl;
+										cin>>Quien;
+										cout<<"Que tanto lo quiere sentir como un CRACK #cuchao"<<endl;
+										cin>>amor;
+										Lavaplatos* Crack = dynamic_cast<Lavaplatos*>(lista.at(Quien));
+										Crack->setMotivacion(Crack->getMotivacion()+amor);
+									}else{
+										cout<<"No hay nadie a quien agradecer"<<endl;
+									}
 
 								}break;
 
 							}
 
-						}else if(dynamic_cast<Cliente*>(actual)){
-
 						}
-
-
-
 					}else{
-						cout<<"Lo siento, introdujo algo mal"<<endl;
+						cout<<"No ha podido entrar"<<endl;
 					}
-				}else{
-					cout<<"No ha podido entrar"<<endl;
 				}
 			}
 		}
@@ -226,6 +257,7 @@ int main(){
 
 	return 0;
 }
+
 
 vector<Usuario*>Contratar(vector<Usuario*>lista,Usuario* act){
 	string username,password,nombre,id,numero,edad;
